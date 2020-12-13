@@ -1,44 +1,32 @@
-<nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null">
-    <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Storeos Admin Panel</h1>
-      </a>
+<mat-grid-list cols="20" rowHeight="1vh" gutterSize="0">
+  <mat-grid-tile colspan="20" rowspan="8" [style.background]="'lightblue'">
+    <div class="header">
+      <img src="favicon.ico">
+      <span>Storeos Admin Dashboard</span>
+      <div class="options">
+        <button mat-mini-fab>
+          <mat-icon>account_box</mat-icon>
+        </button>
+        <button mat-mini-fab>
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+      </div>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Shop" nzIcon="shop">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/products">Products</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/blog">Blog</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Management" nzIcon="setting">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/settings">Settings</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
-        </span>
-      </div>
-    </nz-header>
-    <nz-content>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
-  </nz-layout>
-</nz-layout>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2" rowspan="92" [style.background]="'lightgreen'">
+    <div class="menu">
+      <button mat-button>
+        <mat-icon>shopping_bag</mat-icon> Products
+      </button>
+      <button mat-button>
+        <mat-icon>message</mat-icon> Blog
+      </button>
+      <button mat-button>
+        <mat-icon>settings</mat-icon> Settings
+      </button>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="18" rowspan="92" [style.background]="'lightpink'">
+    <router-outlet></router-outlet>
+  </mat-grid-tile>
+</mat-grid-list>
