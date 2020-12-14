@@ -15,18 +15,18 @@
   </mat-grid-tile>
   <mat-grid-tile colspan="2" rowspan="92" [style.background]="'lightgreen'">
     <div class="menu">
-      <button mat-button>
+      <button mat-button routerLink="/products" routerLinkActive="active">
         <mat-icon>shopping_bag</mat-icon> Products
       </button>
-      <button mat-button>
+      <button mat-button routerLink="/blog" routerLinkActive="active">
         <mat-icon>message</mat-icon> Blog
       </button>
-      <button mat-button>
+      <button mat-button routerLink="/settings" routerLinkActive="active">
         <mat-icon>settings</mat-icon> Settings
       </button>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile colspan="18" rowspan="92" [style.background]="'lightpink'">
+  <mat-grid-tile colspan="18" rowspan="92" [style.background]="'white'">
     <router-outlet></router-outlet>
   </mat-grid-tile>
 </mat-grid-list>
