@@ -18,6 +18,7 @@ export class ProductsComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'title'];
   exampleDatabase!: ExampleHttpDatabase | null;
   data: Product[] = [];
+  size: number[] = [5, 10, 15, 20];
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -40,7 +41,7 @@ export class ProductsComponent implements AfterViewInit {
         switchMap(() => {
           this.isLoadingResults = true;
           return this.exampleDatabase!.getProducts(
-            this.sort.active, this.sort.direction, this.paginator.pageIndex, query ? query : '');
+            this.sort.active, this.sort.direction, this.paginator.pageIndex, query ? query : '', this.paginator.pageSize);
         }),
         map(data => {
           // Flip flag to show that loading has finished.
@@ -84,10 +85,10 @@ export interface Product {
 export class ExampleHttpDatabase {
   constructor(private _httpClient: HttpClient) { }
 
-  getProducts(sort: string, order: string, page: number, query: string): Observable<Products> {
-    const href = 'https://store-api.alchersan.com/api/v1/alchersan/products';
+  getProducts(sort: string, order: string, page: number, query: string, size: number): Observable<Products> {
+    const href = 'http://localhost:8080/api/v1/alchersan/products';
     const requestUrl =
-      `${href}?page=${page}&order=${order}&sort=${sort}&q=${query}`;
+      `${href}?size=${size}&page=${page}&order=${order}&sort=${sort}&q=${query}`;
 
     return this._httpClient.get<Products>(requestUrl);
   }
