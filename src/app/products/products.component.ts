@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { DialogComponent } from '../dialog/dialog.component';
 
 /**
  * @title Table retrieving data through HTTP
@@ -15,7 +17,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'title'];
+  displayedColumns: string[] = ['id', 'title', 'image', 'actions'];
   exampleDatabase!: ExampleHttpDatabase | null;
   data: Product[] = [];
   size: number[] = [5, 10, 15, 20];
@@ -27,7 +29,7 @@ export class ProductsComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient, public dialog: MatDialog) { }
 
   ngAfterViewInit(query?: string) {
     this.exampleDatabase = new ExampleHttpDatabase(this._httpClient);
@@ -68,6 +70,19 @@ export class ProductsComponent implements AfterViewInit {
     if (this.paginator) {
       this.paginator.firstPage();
     }
+  }
+
+  openDialog(row: Product, type: string) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        product: row,
+        type
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
 
