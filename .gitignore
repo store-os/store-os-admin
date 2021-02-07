@@ -44,3 +44,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+.terraform
+.terraform.lock*
+build
+*.zip
+fit.plan
